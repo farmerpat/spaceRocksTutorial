@@ -11,6 +11,8 @@ onready var bullet_container = get_node("bullet_container")
 
 onready var gun_timer = get_node("gun_timer")
 
+onready var shoot_sound = get_node("shoot_sound")
+
 var screen_size = Vector2()
 var rot = 0
 var pos = Vector2()
@@ -60,3 +62,4 @@ func shoot():
 	var b = bullet.instance()
 	bullet_container.add_child(b)
 	b.start_at(get_rot(), get_node("muzzle").get_global_pos())
+	shoot_sound.play("Laser_Shoot2");

@@ -5,6 +5,26 @@ var vel = Vector2()
 var rot_speed
 var screen_size
 var extents
+var textures = {
+	'big': [
+		'res://art/sheet.meteorGrey_big1.atex',
+		'res://art/sheet.meteorGrey_big2.atex',
+		'res://art/sheet.meteorGrey_big3.atex',
+		'res://art/sheet.meteorGrey_big4.atex'
+	],
+	'med': [
+		'res://art/sheet.meteorGrey_med1.atex',
+		'res://art/sheet.meteorGrey_med2.atex'
+	],
+	'sm': [
+		'res://art/sheet.meteorGrey_small1.atex',
+		'res://art/sheet.meteorGrey_small2.atex'
+	],
+	'tiny': [
+		'res://art/sheet.meteorGrey_tiny1.atex',
+		'res://art/sheet.meteorGrey_tiny2.atex'
+	]
+}
 
 onready var puff = get_node("puff")
 
@@ -14,8 +34,16 @@ func _ready():
 	vel = Vector2(rand_range(30, 100), 0).rotated(rand_range(0, 2*PI))
 	rot_speed = rand_range(-1.5, 1.5)
 	screen_size = get_viewport_rect().size
+
+func init(size, pos):
+	var texture = load(textures[size][randi() % textures[size].size()])
+	get_node("sprite").set_texture(texture)
 	# we divide by two b/c we care about how far the edge is from the center of the texture
-	extents = get_node("sprite").get_texture().get_size() / 2
+	extents = texture.get_size() / 2
+	var shape = CircleShape2D.new()
+	shape.set_radius(min(texture.get_width()/2, texture.get_height()/2))
+	add_shape(shape)
+	set_pos(pos)
 
 func _fixed_process(delta):
 	set_rot(get_rot() + rot_speed * delta)

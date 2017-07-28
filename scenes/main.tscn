@@ -1,8 +1,33 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://art/starfield.png" type="Texture" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sounds/expl1.wav" type="Sample" id=4]
+[ext_resource path="res://sounds/expl2.wav" type="Sample" id=5]
+[ext_resource path="res://sounds/expl3.wav" type="Sample" id=6]
+[ext_resource path="res://sounds/SimpleBeat.ogg" type="AudioStream" id=7]
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/expl1 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+samples/expl2 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+samples/expl3 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 6 )
+}
 
 [node name="main" type="Node"]
 
@@ -17,8 +42,6 @@ texture = ExtResource( 2 )
 [node name="player" parent="." instance=ExtResource( 3 )]
 
 [node name="spawn_locations" type="Node" parent="."]
-
-editor/display_folded = true
 
 [node name="1" type="Position2D" parent="spawn_locations"]
 
@@ -53,5 +76,33 @@ transform/pos = Vector2( 516.217, 519.757 )
 transform/pos = Vector2( 896.098, 531.15 )
 
 [node name="asteroid_container" type="Node" parent="."]
+
+[node name="explosion_sounds" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="music" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 7 )
+stream/play = false
+stream/loop = false
+stream/volume_db = 0.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
 
 

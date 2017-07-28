@@ -5,12 +5,15 @@
 
 [node name="asteroid" type="KinematicBody2D"]
 
-transform/pos = Vector2( 490.953, 298.489 )
+transform/pos = Vector2( 176.651, 303.4 )
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 bounce = 1.1
 
 [node name="sprite" type="Sprite" parent="."]
